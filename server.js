@@ -9,14 +9,14 @@ app.use(express.json());
 
 const tables = [
     {
-        uniqueId: "table1",
+        uniqueID: "table1",
         name: "Alex",
         phone: 4076908746,
         email: "mail@mail.com",
         index: 0
     },
     {
-        uniqueId: "table2",
+        uniqueID: "table2",
         name: "Alex",
         phone: 4076908746,
         email: "mail@mail.com",
