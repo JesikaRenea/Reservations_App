@@ -22,20 +22,7 @@ app.use(express.json());
 //     }
 //   ];
   
-let tableData = [
-    {
-        customerID: "table1",
-        customerName: "Alex",
-        phoneNumber: 4076908746,
-        customerEmail: "mail@mail.com",
-    },
-    {
-        customerID: "table2",
-        customerName: "Alex",
-        phoneNumber: 4076908746,
-        customerEmail: "mail@mail.com",
-    }
-];
+let tableData = [];
 let waitlistData = [];
 
 
@@ -55,6 +42,11 @@ app.get("/reserve", function(req, res) {
 app.get("/api/tables", function(req, res) {
     return res.json(tableData);
 }); 
+app.get("/api/waitlist", function(req, res) {
+    return res.json(waitlistData);
+}); 
+
+
 app.get("/api/tables/:table", function(req, res) {
     const chosen = req.params.table;
     console.log(chosen);
@@ -74,14 +66,14 @@ app.post("/api/tables", function(req, res) {
         return false
     }};
     console.log(newTable);
-    if (tableData.length < 6){
-        tableData = tableData.map(table => tableData.push(table))
+    if (tableData.length < 5){
+        tableData.push(newTable)
         console.log(tableData);
     } else {
-        waitlistData = tableData.map(table => waitlistData.push(table))
+        waitlistData.push(newTable);
         console.log(waitlistData);
     }
-    tableData.push(newTable);
+    // tableData.push(newTable);
     res.json(newTable);
 });
 
