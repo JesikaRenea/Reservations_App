@@ -55,7 +55,7 @@ app.get("/api/tables/:table", function(req, res) {
 });
 app.post("/api/tables", function(req, res) {
     var newTable = req.body;
-    newTable.routeName = newTable.name.replace(/\s+/g, "").toLowerCase();
+    newTable.routeName = newTable.customerName.replace(/\s+/g, "").toLowerCase();
     for (var i = 0; i < tables.length; i++) {
     if (newTable.routeName === tables[i].routeName){
         alert("The reservation already exists.")
