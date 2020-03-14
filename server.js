@@ -30,7 +30,7 @@ const waitlist = [];
 
 app.get("/", function(req, res) {
     // res.send("Welcome to the restaurant!");
-    res.sendFile(path.join(__dirname, "templates/index.html"));
+    res.sendFile(path.join(__dirname, "templates/home.html"));
 });
 
 app.get("/tables", function(req, res) {
