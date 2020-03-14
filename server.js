@@ -7,7 +7,22 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const tables = [
+// const tables = [
+//     {
+//         customerID: "table1",
+//         customerName: "Alex",
+//         phoneNumber: 4076908746,
+//         customerEmail: "mail@mail.com",
+//     },
+//     {
+//         customerID: "table2",
+//         customerName: "Alex",
+//         phoneNumber: 4076908746,
+//         customerEmail: "mail@mail.com",
+//     }
+//   ];
+  
+let tableData = [
     {
         customerID: "table1",
         customerName: "Alex",
@@ -20,10 +35,8 @@ const tables = [
         phoneNumber: 4076908746,
         customerEmail: "mail@mail.com",
     }
-  ];
-  
-const tableData = [];
-const waitlistData = [];
+];
+let waitlistData = [];
 
 
 app.get("/", function(req, res) {
@@ -40,14 +53,14 @@ app.get("/reserve", function(req, res) {
     res.sendFile(path.join(__dirname, "templates/reserve.html"));
 });
 app.get("/api/tables", function(req, res) {
-    return res.json(tables);
+    return res.json(tableData);
 }); 
 app.get("/api/tables/:table", function(req, res) {
     const chosen = req.params.table;
     console.log(chosen);
-    for (var i = 0; i < tables.length; i++) {
-      if (chosen === tables[i].routeName) {
-        return res.json(tables[i]);
+    for (var i = 0; i < tableData.length; i++) {
+      if (chosen === tableData[i].routeName) {
+        return res.json(tableData[i]);
       }
     }
   
@@ -56,20 +69,19 @@ app.get("/api/tables/:table", function(req, res) {
 app.post("/api/tables", function(req, res) {
     var newTable = req.body;
     newTable.routeName = newTable.customerName.replace(/\s+/g, "").toLowerCase();
-    for (var i = 0; i < tables.length; i++) {
-    if (newTable.routeName === tables[i].routeName){
-        alert("The reservation already exists.")
+    for (var i = 0; i < tableData.length; i++) {
+    if (newTable.routeName === tableData[i].routeName){
         return false
     }};
     console.log(newTable);
-    if (tables.length < 6){
-        tableData = tables.map(table => tableData.push(table))
+    if (tableData.length < 6){
+        tableData = tableData.map(table => tableData.push(table))
         console.log(tableData);
     } else {
-        waitlistData = tables.map(table => waitlistData.push(table))
+        waitlistData = tableData.map(table => waitlistData.push(table))
         console.log(waitlistData);
     }
-    tables.push(newTable);
+    tableData.push(newTable);
     res.json(newTable);
 });
 
