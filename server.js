@@ -9,23 +9,21 @@ app.use(express.json());
 
 const tables = [
     {
-        uniqueID: "table1",
-        name: "Alex",
-        phone: 4076908746,
-        email: "mail@mail.com",
-        index: 0
+        customerID: "table1",
+        customerName: "Alex",
+        phoneNumber: 4076908746,
+        customerEmail: "mail@mail.com",
     },
     {
-        uniqueID: "table2",
-        name: "Alex",
-        phone: 4076908746,
-        email: "mail@mail.com",
-        index: 1
+        customerID: "table2",
+        customerName: "Alex",
+        phoneNumber: 4076908746,
+        customerEmail: "mail@mail.com",
     }
   ];
   
-const reservations = [];
-const waitlist = [];
+const tableData = [];
+const waitlistData = [];
 
 
 app.get("/", function(req, res) {
@@ -65,10 +63,11 @@ app.post("/api/tables", function(req, res) {
     }};
     console.log(newTable);
     if (tables.length < 6){
-        reservations = tables.map(table => reservations.push(table))
-        console.log(reservations);
+        tableData = tables.map(table => tableData.push(table))
+        console.log(tableData);
     } else {
-        waitlist = tables.map(table => waitlist.push(table))
+        waitlistData = tables.map(table => waitlistData.push(table))
+        console.log(waitlistData);
     }
     tables.push(newTable);
     res.json(newTable);
